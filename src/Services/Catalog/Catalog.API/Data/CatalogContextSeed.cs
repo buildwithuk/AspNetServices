@@ -13,7 +13,7 @@ namespace Catalog.API.Data
 		{
 			bool doesProductExist = productCollection.Find(p => true).Any();
 
-			if (doesProductExist)
+			if (!doesProductExist)
 			{
 				productCollection.InsertManyAsync(GetProductsToSeed());
 			}
