@@ -45,6 +45,7 @@ services:
     environment:
       - CacheSettings:ConnectionString=basketdb:6379
       - ASPNETCORE_ENVIRONMENT=Development
+      - "GrpcSettings:DiscountUrl=http://discount.grpc"
     ports:
       - "8001:80"
 
@@ -78,3 +79,12 @@ services:
       - discountdb
     ports:
       - "8002:80"
+  discount.grpc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "8003:80"
+
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
