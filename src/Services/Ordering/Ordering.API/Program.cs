@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Ordering.API.Extensions;
 using Ordering.Infrastructure.Persistence;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Ordering.API
 {
@@ -11,16 +12,26 @@ namespace Ordering.API
 	{
 		public static void Main(string[] args)
 		{
-			CreateHostBuilder(args)
-				.Build()
-					  .MigrateDatabase<OrderContext>((context, services) =>
-					  {
-						  var logger = services.GetService<ILogger<OrderContextSeed>>();
-						  OrderContextSeed
-							  .SeedAsync(context, logger)
-							  .Wait();
-					  })
-				.Run();
+			try
+			{
+				CreateHostBuilder(args)
+			.Build()
+				  .MigrateDatabase<OrderContext>((context, services) =>
+				  {
+					  var logger = services.GetService<ILogger<OrderContextSeed>>();
+					  OrderContextSeed
+						  .SeedAsync(context, logger)
+						  .Wait();
+				  })
+			.Run();
+			} catch(Exception e)
+			{
+				Console.WriteLine("Exceptipon occured");
+				Console.WriteLine(e.Message);
+				Console.WriteLine(e.Source);
+
+			}
+		
 		}
 
 		public static IHostBuilder CreateHostBuilder(string[] args) =>

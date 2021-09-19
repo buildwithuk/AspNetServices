@@ -49,8 +49,16 @@ namespace Ordering.API.Extensions
                                                     IServiceProvider services)
                                                     where TContext : DbContext
         {
-            context.Database.Migrate();
-            seeder(context, services);
+            try
+			{
+                context.Database.Migrate();
+                seeder(context, services);
+            }
+            catch(Exception e)
+			{
+                Console.WriteLine(e.Message);
+			}
+            
         }
     }
 }
