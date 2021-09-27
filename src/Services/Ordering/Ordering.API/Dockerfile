@@ -10,6 +10,7 @@ COPY ["Services/Ordering/Ordering.API/Ordering.API.csproj", "Services/Ordering/O
 COPY ["Services/Ordering/Ordering.Infrastructure/Ordering.Infrastructure/Ordering.Infrastructure.csproj", "Services/Ordering/Ordering.Infrastructure/Ordering.Infrastructure/"]
 COPY ["Services/Ordering/Ordering.Application/Ordering.Application/Ordering.Application.csproj", "Services/Ordering/Ordering.Application/Ordering.Application/"]
 COPY ["Services/Ordering/Ordering.Domain/Ordering.Domain/Ordering.Domain.csproj", "Services/Ordering/Ordering.Domain/Ordering.Domain/"]
+COPY ["BuildingBlock/Events/Events/Events.csproj", "BuildingBlock/Events/Events/"]
 RUN dotnet restore "Services/Ordering/Ordering.API/Ordering.API.csproj"
 COPY . .
 WORKDIR "/src/Services/Ordering/Ordering.API"
